@@ -1,30 +1,23 @@
 import { Canvas } from '@react-three/fiber'
 import type { NextPage } from 'next'
 import { Suspense, useState } from 'react'
-import Lights from '../components/Light'
-import Model from '../components/Model'
-import styles from "../styles/index.module.css"
+import { H1, H2, Model, Lights, PageContainer, ModalContainer } from "../components"
 
 const Home: NextPage = () => {
 
-  const [modalDisplayStatus, setModalDisplayStatus] = useState("none")
+  const [modalDisplayStatus, setModalDisplayStatus] = useState<"none" | "block">("none")
 
   setTimeout(() => {
    setModalDisplayStatus("block")
   }, 2500)
 
   return (
-    <div 
-    className={styles.pageContainer}
-    >
-      <h1>By Rodrigo Rodrigues</h1>
-      <div 
-      className={styles.modalContainer}
-      style={{
-        display: modalDisplayStatus
-      }}
+    <PageContainer>
+      <H1>by Rodrigo Rodrigues</H1>
+      <ModalContainer
+      display={modalDisplayStatus}
       />
-      <h2>A Simple Three JS Example</h2>
+      <H2>A Simple Three JS Example</H2>
       <Canvas 
       camera={{ position: [0, 0, 2] }}
       >
@@ -33,7 +26,7 @@ const Home: NextPage = () => {
           <Model/>
         </Suspense>
       </Canvas>
-    </div>
+    </PageContainer>
   )
 
 }
